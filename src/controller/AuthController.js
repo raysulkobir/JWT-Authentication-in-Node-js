@@ -6,7 +6,7 @@ const secretKey = process.env.SECRET_KEY // Fix the config issue
 
 // Register user
 exports.register = async (req, res) => {
-  const { username, password } = req.body
+  const { username, password, email, firstName, lastName, phone, dob, gender, role } = req.body
 
   if (!username || !password) {
     return res
@@ -27,6 +27,13 @@ exports.register = async (req, res) => {
     //TODO Create a new user with the hashed password
     const result = await User.create({
       username,
+      email,
+      firstName,
+      lastName,
+      phone,
+      dob,
+      gender,
+      role,
       password: hashedPassword,
     })
     res.status(201).json({
